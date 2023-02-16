@@ -55,4 +55,5 @@ class MainController extends Controller
         return view('pages.movie.editMovie', compact('tags', 'genres', 'movie'));
     }
 
+    
 }
