@@ -1,8 +1,8 @@
 @extends('layout.main-layout')
 
 @section('content')
-    <h1>ADD NEW MOVIE</h1> 
-    <form action="{{route('movie.store')}}" method="post">
+    <h1>EDIT MOVIE</h1> 
+    <form action="{{route('movie.update', $movie)}}" method="post">
         @csrf
         <div>
 
@@ -46,7 +46,7 @@
 
 
 
-        <input type="submit" value="CREATE NEW MOVIE">
+        <input type="submit" value="EDIT MOVIE">
     </form>
     
 @endsection
