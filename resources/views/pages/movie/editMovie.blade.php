@@ -21,10 +21,10 @@
             <input type="text" name='cashOut' value="{{$movie -> cashOut}}">
         </div>
 
-        
+        <label for="genres">Genre</label>
         <select name="genres" >
             @foreach ($genres as $genre)
-            <option value="{{$genre -> id}}">
+            <option value="{{$genre -> id}}" @selected ($movie -> genre -> id == $genre -> id)>
                 {{$genre -> name}}
             </option>
                 
@@ -32,13 +32,19 @@
         </select>
 
 
+        <h3>Tag</h3>
             @foreach ($tags as $tag)
             <div>
 
-                <input type="checkbox" name="tags[]" value="{{$tag-> id}}">
+                <input type="checkbox" name="tags[]" value="{{$tag-> id}}" 
+                    @foreach ($movie -> tags as $movieTag)
+                        @checked ($movieTag -> id == $tag -> id)
+                    @endforeach>
                 <label for="tags">{{$tag-> name}}</label>
             </div>
             @endforeach
+
+
 
         <input type="submit" value="CREATE NEW MOVIE">
     </form>
