@@ -34,4 +34,3 @@ Route::get('/movie/edit/{movie}', [MainController::class, 'movieEdit'])
 Route::post('/movie/edit/{movie}', [MainController::class, 'movieUpdate'])
    -> name('movie.update');
    
-Route::get('/api/v1/movies', [ApiController::class, 'apiMovie']);

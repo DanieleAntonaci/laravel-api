@@ -3,5 +3,7 @@
 use App\Http\Controllers\ApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MainController;
 
-// Route::get('/api/v1/movie', [ApiController::class, 'apiMovie']);
+
+Route::get('/v1/movies', [ApiController::class, 'apiMovie']);
