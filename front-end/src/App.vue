@@ -154,7 +154,32 @@ export default {
             this.axiosRequest();
           }
         }).catch(err => console.error(err));
+    }, cancelUpdateMovie(e) {
+
+      e.preventDefault();
+      this.turnOffUpdateMovie();
+    }, cancelUpdateMovie(e) {
+
+      e.preventDefault();
+      this.turnOffUpdateMovie();
     },
+
+    deleteClick(id) {
+
+      axios.get(API_URL + 'movie/delete/' + id)
+        .then(res => {
+
+          const data = res.data;
+          const success = data.success;
+
+          if (success) {
+
+            this.updateMovies();
+          }
+        })
+        .catch(err => console.error(err));
+    },
+
     getMovieIndexById(id) {
 
       for (let x = 0; x < this.movies.length; x++) {
