@@ -30,4 +30,26 @@ class ApiController extends Controller
             'success' => true
         ]);
     }
+    public function movieStore(Request $request){
+        $data = $request -> validate([
+            'name' => 'required|string',
+            'year' => 'required|integer',
+            'cashOut' => 'required|integer',
+            'genres' => 'required|integer',
+            'tags' => 'required|array'
+        ]);
+        
+        $movie = Movie::make($data);
+        $genre = Genre::find($data['genres']);
+
+        $movie -> genre() -> associate($genre);
+        $movie->save();
+
+        $tags = Tag::find($data['tags']);
+        $movie -> tags() ->attach($tags);
+        return response() ->json([
+            'success' => true,
+            'response'=>$movie
+        ]);
+    }
 }
