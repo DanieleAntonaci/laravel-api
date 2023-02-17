@@ -88,11 +88,12 @@ export default {
 
 
 
-      <!-- <div>
+      <div v-for="tag in tags" :key="tag.id">
 
-          <input type="checkbox" name="tags[]" value="{{$tag-> id}}">
-          <label for="tags">{{ $tag -> name }}</label>
-      </div> -->
+          <input type="checkbox" @click="updateCheckbox" :value="tag.id" :id="tag.id" v-model="movie_tags">
+
+          <label :for="tag.id">{{ tag.name }}</label>
+      </div>
 
 
       <input type="submit" value="CREATE NEW MOVIE">
