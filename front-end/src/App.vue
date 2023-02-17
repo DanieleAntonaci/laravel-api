@@ -3,7 +3,7 @@ import axios from 'axios'
 export default {
   data() {
     return {
-      linkApi: 'http://127.0.0.1:8000/api/v1/',
+      linkApi: 'http://localhost:8000/api/v1/',
       movie: '',
 
     }
@@ -49,7 +49,7 @@ export default {
       {{ film.name }}--
       {{ film.year }}--
       {{ film.cashOut }}
-       <button @click="deleteMovie(index)">DELETE</button>
+       <button @click="deleteMovie(film.id)">DELETE</button>
     </div>
   </div>
 </template>
