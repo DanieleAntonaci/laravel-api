@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class ApiController extends Controller
 {
     public function apiMovie (){
-        $movies = Movie::all();
+        $movies = Movie::with('tags') -> get();
         $tags= Tag ::all();
         $genres= Genre::all();
         return response() -> json([
@@ -50,6 +50,29 @@ class ApiController extends Controller
         return response() ->json([
             'success' => true,
             'response'=>$movie
+        ]);
+    }
+    public function movieUpdate(Request $request, Movie $movie) {
+
+        $data = $request -> validate([
+            'name' => 'required|string|min:3',
+            'year' => 'required|integer|min:0',
+            'cashOut' => 'required|integer|min:0',
+            'genre_id' => 'required|integer|min:1',
+            'tags_id' => 'required|array'
+        ]);
+
+        $genre = Genre :: find($data['genre_id']);
+        $movie -> update($data);
+        $movie -> genre() -> associate($genre);
+        $movie -> save();
+
+        $tags = Tag :: find($data['tags_id']);
+        $movie -> tags() -> sync($tags);
+    
+        return response() -> json([
+            'success' => true,
+            'response' => $movie
         ]);
     }
 }
