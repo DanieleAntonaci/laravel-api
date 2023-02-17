@@ -4,8 +4,10 @@ export default {
   data() {
     return {
       linkApi: 'http://localhost:8000/api/v1/',
-      movie: '',
-
+      movies: [],
+      tags: [],
+      genres: [],
+      movieCreating: false,
     }
   },
   methods: {
@@ -13,7 +15,19 @@ export default {
       axios.get(this.linkApi + 'movies')
         .then(res => {
           const data = res.data;
-          this.movie = data.responde;
+          const success = data.success;
+          const response = data.response;
+
+          const movies = response.movies;
+          const genres = response.genres;
+          const tags = response.tags;
+
+          if (success) {
+
+            this.movies = movies;
+            this.genres = genres;
+            this.tags = tags;
+          }
         })
         .catch(err => {
           console.error(err);
@@ -33,6 +47,10 @@ export default {
         .catch(err => {
           console.error(err);
         })
+    },
+    // apertura e chiusura del form di creazione
+    openCreateMovie() {
+      this.movieCreating = true;
     }
   },
   mounted() {
@@ -45,7 +63,43 @@ export default {
 <template>
   <div>
     <h1>Movies</h1>
-    <div v-for="(film, index) in movie" :key="index">
+    <form v-if="movieCreating">
+      
+      <div>
+        <label for="name">Name</label>
+        <input type="text" name='name'>
+      </div>
+
+      <div>
+        <label for="year">year</label>
+        <input type="text" name='year'>
+      </div>
+
+      <div>
+        <label for="cashOut">cashOut</label>
+        <input type="text" name='cashOut'>
+      </div>
+
+      <select name="genres" >
+        <option v-for="genre in genres" :key="genre.id" :value="genre.id"> 
+          {{ genre.name }}
+        </option>
+      </select>
+
+
+
+      <!-- <div>
+
+          <input type="checkbox" name="tags[]" value="{{$tag-> id}}">
+          <label for="tags">{{ $tag -> name }}</label>
+      </div> -->
+
+
+      <input type="submit" value="CREATE NEW MOVIE">
+    </form>
+    <button @click="openCreateMovie()" v-else>create new element</button>
+
+    <div v-for="(film, index) in movies" :key="index">
       {{ film.name }}--
       {{ film.year }}--
       {{ film.cashOut }}

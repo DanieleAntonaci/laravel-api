@@ -11,9 +11,15 @@ class ApiController extends Controller
 {
     public function apiMovie (){
         $movies = Movie::all();
+        $tags= Tag ::all();
+        $genres= Genre::all();
         return response() -> json([
             'success' => 'true',
-            'responde' => $movies,
+            'response'=>[
+                'movies' => $movies,
+                'genres' => $genres,
+                'tags' => $tags
+                ]
         ]);
     }
     public function movieDelete(Movie $movie){
