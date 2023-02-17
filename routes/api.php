@@ -7,3 +7,5 @@ use App\Http\Controllers\MainController;
 
 
 Route::get('/v1/movies', [ApiController::class, 'apiMovie']);
+Route:: get('/v1/movie/delete/{movie}', [MainController::class, 'movieDelete'])
+   -> name('movie.delete');
