@@ -86,8 +86,8 @@ export default {
         'name': this.movie_name,
         'year': this.movie_year,
         'cashOut': this.movie_cashOut,
-        'genre_id': this.movie_genre,
-        'tags_id': this.movie_tags,
+        'genres': this.movie_genre,
+        'tags': this.movie_tags,
       };
     },
   },
@@ -110,12 +110,12 @@ export default {
 
       <div>
         <label for="year">year</label>
-        <input type="text" name='year' v-model="movie_year">
+        <input type="number" name='year' v-model="movie_year">
       </div>
 
       <div>
         <label for="cashOut">cashOut</label>
-        <input type="text" name='cashOut' v-model="movie_cashOut">
+        <input type="number" name='cashOut' v-model="movie_cashOut">
       </div>
 
       <select name="genres"  v-model="movie_genre">
