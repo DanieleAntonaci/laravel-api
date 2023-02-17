@@ -58,6 +58,9 @@ export default {
     openCreateMovie() {
       this.movieCreating = true;
     },
+    closeCreateMovie() {
+      this.movieCreating = false;
+    },
 
     // store movie
     storeMovie(e) {
@@ -73,7 +76,7 @@ export default {
 
           if (success) {
 
-            // this.clearForms();
+            this.clearForms();
             this.axiosRequest();
           }
         }).catch(err => console.error(err));
@@ -90,6 +93,15 @@ export default {
         'tags': this.movie_tags,
       };
     },
+    clearForms() {
+      this.movie_name = '';
+      this.movie_year = '';
+      this.movie_cashOut = '';
+      this.movie_genre = '';
+      this.movie_tags = [];
+
+      this.closeCreateMovie();
+    }
   },
   mounted() {
     this.axiosRequest();
