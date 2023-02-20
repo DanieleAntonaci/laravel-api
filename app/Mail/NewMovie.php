@@ -29,7 +29,9 @@ class NewMovie extends Mailable
     {
         return new Envelope(
             subject: 'New Movie',
-            replyTo: 'email@movie.com'
+            replyTo:[
+                'email@movie.com'
+            ]
         );
     }
 

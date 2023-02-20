@@ -53,7 +53,7 @@ class ApiController extends Controller
         Mail::to('email@movie.com')
             -> send(new NewMovie($movie));
 
-            return response() ->json([
+        return response() ->json([
             'success' => true,
             'response'=>$movie
         ]);
