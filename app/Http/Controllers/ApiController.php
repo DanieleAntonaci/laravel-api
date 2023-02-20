@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NewMovie;
 use App\Models\Movie;
 use App\Models\Tag;
 use App\Models\Genre;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ApiController extends Controller
 {
     public function apiMovie (){
-        $movies = Movie::with('tags') -> get();
+        $movies = Movie::with('tags') -> orderBy('created_at', 'desc') -> get();;
         $tags= Tag ::all();
         $genres= Genre::all();
         return response() -> json([
@@ -47,7 +49,11 @@ class ApiController extends Controller
 
         $tags = Tag::find($data['tags']);
         $movie -> tags() ->attach($tags);
-        return response() ->json([
+
+        Mail::to('email@movie.com')
+            -> send(new NewMovie($movie));
+
+            return response() ->json([
             'success' => true,
             'response'=>$movie
         ]);
