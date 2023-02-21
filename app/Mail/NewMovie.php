@@ -28,10 +28,11 @@ class NewMovie extends Mailable
     public function envelope()
     {
         return new Envelope(
+            from: 'email@movie.com',
             subject: 'New Movie',
             replyTo:[
                 'email@movie.com'
-            ]
+            ],
         );
     }
 
@@ -43,7 +44,7 @@ class NewMovie extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'mail.new-movie',
         );
     }
 

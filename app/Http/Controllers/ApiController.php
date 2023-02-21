@@ -50,12 +50,15 @@ class ApiController extends Controller
         $tags = Tag::find($data['tags']);
         $movie -> tags() ->attach($tags);
 
+
         Mail::to('email@movie.com')
-            -> send(new NewMovie($movie));
+        -> send(new NewMovie($movie) );
+
 
         return response() ->json([
             'success' => true,
-            'response'=>$movie
+            'response'=>$movie,
+            'data' => $request -> all()
         ]);
     }
     public function movieUpdate(Request $request, Movie $movie) {
